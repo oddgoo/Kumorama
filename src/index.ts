@@ -1,7 +1,14 @@
+import Vue from 'vue';
+import Vuex from 'vuex';
+
+import App from './App.vue';
+
 import * as PIXI from "pixi.js";
 
 import tilesImage from "./assets/Tileset.png";
 import rabbitImage from "./assets/rabbit.png";
+
+
 
 export class Main {
     private static readonly GAME_WIDTH = 800;
@@ -12,6 +19,7 @@ export class Main {
     constructor() {
         window.onload = (): void => {
             this.startLoadingAssets();
+
         };
     }
 
@@ -34,12 +42,10 @@ export class Main {
     }
 
     private onAssetsLoaded(): void {
+
         this.createRenderer();
 
         const stage = this.app.stage;
-
-        const bunny = this.getBunny();
-        bunny.position.set(Main.GAME_WIDTH / 2, Main.GAME_HEIGHT / 2);
 
         const texture = PIXI.Texture.from("tiles");
         texture.frame = new PIXI.Rectangle(16, 0, 16, 16);
@@ -47,18 +53,10 @@ export class Main {
         tile.scale.set(10, 2);
         tile.position.set(128,128);
 
-        const birdFromSprite = this.getBird();
-        birdFromSprite.anchor.set(0.5, 0.5);
-        birdFromSprite.position.set(Main.GAME_WIDTH / 2, Main.GAME_HEIGHT / 2 + bunny.height);
+        this.addRandomSprite();
+        this.addRandomSprite();
 
         stage.addChild(tile);
-        // stage.addChild(bunny);
-        // stage.addChild(birdFromSprite);
-
-        this.app.ticker.add(() => {
-            bunny.rotation += 0.05;
-        });
-
 
         //Filter
         const blurFilter1 = new PIXI.filters.BlurFilter();
@@ -77,46 +75,44 @@ export class Main {
         this.app.renderer.resize(window.innerWidth, window.innerHeight);
         this.app.stage.scale.x = window.innerWidth / Main.GAME_WIDTH;
         this.app.stage.scale.y = window.innerHeight / Main.GAME_HEIGHT;
-
-        window.addEventListener("resize", this.onResize.bind(this));
     }
 
-    private onResize(): void {
-        if (!this.app) {
-            return;
-        }
+    public addRandomSprite(): void {
+        const texture = PIXI.Texture.from("tiles");
+        texture.frame = new PIXI.Rectangle(32, 0, 16, 16);
+        const tile = new PIXI.Sprite(texture);
+        tile.scale.set(4, 4);
+        tile.position.set(Math.random() * Main.GAME_WIDTH, Math.random() * Main.GAME_HEIGHT);
+        tile.anchor.set(0.5,0.5);
+        this.app.stage.addChild(tile);
 
-        this.app.renderer.resize(window.innerWidth, window.innerHeight);
-        this.app.stage.scale.x = window.innerWidth / Main.GAME_WIDTH;
-        this.app.stage.scale.y = window.innerHeight / Main.GAME_HEIGHT;
-    }
+        this.app.ticker.add((delta) => {
+            // rotate the container!
+            // use delta to create frame-independent transform
+            tile.rotation -= 0.01 * delta;
+        });
 
-    private getBunny(): PIXI.Sprite {
-        const bunnyRotationPoint = {
-            x: 0.5,
-            y: 0.5,
-        };
-
-        const bunny = new PIXI.Sprite(PIXI.Texture.from("rabbit"));
-        bunny.anchor.set(bunnyRotationPoint.x, bunnyRotationPoint.y);
-        bunny.scale.set(2, 2);
-
-        return bunny;
-    }
-
-    private getBird(): PIXI.AnimatedSprite {
-        const bird = new PIXI.AnimatedSprite([
-            PIXI.Texture.from("birdUp.png"),
-            PIXI.Texture.from("birdMiddle.png"),
-            PIXI.Texture.from("birdDown.png"),
-        ]);
-        bird.loop = true;
-        bird.animationSpeed = 0.1;
-        bird.play();
-        bird.scale.set(3);
-
-        return bird;
     }
 }
 
-new Main();
+const pixi = new Main();
+Vue.use(Vuex);
+
+
+const store = new Vuex.Store({
+    state: {
+        count: 0
+    },
+    mutations: {
+        increment: state => state.count++,
+        decrement: state => state.count--
+    },
+    actions: {
+        increment (context) {
+            context.commit('increment');
+            pixi.addRandomSprite();
+        }
+    }
+})
+
+new Vue({ render: createElement => createElement(App) , store: store}).$mount('#app');
