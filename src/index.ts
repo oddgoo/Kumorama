@@ -1,5 +1,6 @@
 import * as PIXI from "pixi.js";
 
+import tilesImage from "./assets/Tileset.png";
 import rabbitImage from "./assets/rabbit.png";
 
 export class Main {
@@ -21,6 +22,7 @@ export class Main {
 
     private startLoadingAssets(): void {
         const loader = PIXI.Loader.shared;
+        loader.add("tiles", tilesImage);
         loader.add("rabbit", rabbitImage);
         loader.add("spriteExample", "./spritesData.json"); // example of loading spriteSheet
 
@@ -39,16 +41,28 @@ export class Main {
         const bunny = this.getBunny();
         bunny.position.set(Main.GAME_WIDTH / 2, Main.GAME_HEIGHT / 2);
 
+        const texture = PIXI.Texture.from("tiles");
+        texture.frame = new PIXI.Rectangle(16, 0, 16, 16);
+        const tile = new PIXI.Sprite(texture);
+        tile.scale.set(10, 2);
+        tile.position.set(128,128);
+
         const birdFromSprite = this.getBird();
         birdFromSprite.anchor.set(0.5, 0.5);
         birdFromSprite.position.set(Main.GAME_WIDTH / 2, Main.GAME_HEIGHT / 2 + bunny.height);
 
-        stage.addChild(bunny);
-        stage.addChild(birdFromSprite);
+        stage.addChild(tile);
+        // stage.addChild(bunny);
+        // stage.addChild(birdFromSprite);
 
         this.app.ticker.add(() => {
             bunny.rotation += 0.05;
         });
+
+
+        //Filter
+        const blurFilter1 = new PIXI.filters.BlurFilter();
+        tile.filters = [blurFilter1];
     }
 
     private createRenderer(): void {
