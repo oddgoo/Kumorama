@@ -9,14 +9,18 @@ import tilesImage from "./assets/Tileset.png";
 import rabbitImage from "./assets/rabbit.png";
 
 
-
 export class Main {
     private static readonly GAME_WIDTH = 800;
     private static readonly GAME_HEIGHT = 600;
 
     private app!: PIXI.Application;
 
+    private baseTexture:PIXI.BaseTexture;
+    private stage:PIXI.Container;
 
+    private layers:PIXI.Container[] = [];
+
+    private static tileScale=4;
 
     constructor() {
         window.onload = (): void => {
@@ -40,10 +44,9 @@ export class Main {
         });
         //
         loader.load();
+
     }
 
-    private baseTexture:PIXI.BaseTexture;
-    private stage:PIXI.Container;
 
     private onAssetsLoaded(): void {
 
@@ -53,26 +56,21 @@ export class Main {
         this.baseTexture = PIXI.BaseTexture.from("tiles");
         this.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
-        this.renderLayer();
-        // const texture = PIXI.Texture.from("tiles");
-        //
-        // texture.frame = new PIXI.Rectangle(16, 0, 16, 16);
-        // const bg = new PIXI.Sprite(texture);
-        // bg.scale.set(10, 2);
-        // bg.position.set(128,128);
+        this.layers.push(this.renderLayer());
+        this.layers.push(this.renderLayer(10));
+        this.layers[1].alpha =0.5;
+        this.layers[1].x += 100;
+        this.layers[1].y -= 20;
 
-        //this.addRandomSprite();
-        //this.addRandomSprite();
-
-        //this.stage.addChild(tile);
-
-        //Filter
-        const blurFilter1 = new PIXI.filters.BlurFilter(0.5);
-        this.stage.filters = [blurFilter1];
+        this.app.ticker.add((delta) => {
+            this.moveCamera(-0.3,-0.1, -0.1);
+        });
 
     }
 
-    private renderLayer(): void {
+    private renderLayer(blur= 0): PIXI.Container {
+
+        const layer= new PIXI.Container();
 
         const layerData:number[][] = [
             [0,0,6,0,0,0,6],
@@ -82,30 +80,33 @@ export class Main {
         ];
 
         let row = 0;
-        for (let i in layerData){
+        for (const i in layerData){
             let column = 0;
-            for(let r of layerData[i]){
-                this.drawTile(r,column,row);
+            for(const r of layerData[i]){
+                this.drawTile(r,column,row,layer);
                 column++;
             }
             row++;
         }
+
+        if(blur != 0){
+            const blurFilter1 = new PIXI.filters.BlurFilter(blur);
+            layer.filters = [blurFilter1];
+        }
+        this.stage.addChild(layer);
+        return layer;
     }
 
-    private static tileScale=4;
-
-    private drawTile(tileId:number, x:number, y:number): void {
+    private drawTile(tileId:number, x:number, y:number, layer:PIXI.Container): void {
         console.log("drawing tileId " + tileId);
 
-
-
-        let tileTexture = new PIXI.Texture(this.baseTexture, new PIXI.Rectangle(tileId * 16, 0, 16, 16));
+        const tileTexture = new PIXI.Texture(this.baseTexture, new PIXI.Rectangle(tileId * 16, 0, 16, 16));
         //let newTexture = new PIXI.Texture(oldTexture.baseTexture, oldTexture.frame);
 
-        let tile = new PIXI.Sprite(tileTexture);
+        const tile = new PIXI.Sprite(tileTexture);
         tile.scale.set(Main.tileScale, Main.tileScale);
         tile.position.set(x*16*Main.tileScale + 100, y*16*Main.tileScale + 100);
-        this.stage.addChild(tile);
+        layer.addChild(tile);
     }
 
     private createRenderer(): void {
@@ -122,23 +123,21 @@ export class Main {
         this.app.stage.scale.y = window.innerHeight / Main.GAME_HEIGHT;
     }
 
-    public addRandomSprite(): void {
-        // const texture = PIXI.Texture.from("tiles");
-        // texture.frame = new PIXI.Rectangle(32, 0, 16, 16);
-        // const tile = new PIXI.Sprite(texture);
-        // tile.scale.set(4, 4);
-        // tile.position.set(Math.random() * Main.GAME_WIDTH, Math.random() * Main.GAME_HEIGHT);
-        // tile.anchor.set(0.5,0.5);
-        // this.app.stage.addChild(tile);
-        //
-        // this.app.ticker.add((delta) => {
-        //     // rotate the container!
-        //     // use delta to create frame-independent transform
-        //     tile.rotation -= 0.01 * delta;
-        // });
+    private moveCamera(x=0, y=0, z=0): void {
 
+        let i = 1;
+        for(const l of this.layers){
+            l.x-=x/i*2;
+            l.y-=y/i*2;
+            let scale = l.scale.x;
+            scale -= z/(500 * i/2);
+            l.scale.x = l.scale.y = scale;
+            i++;
+        }
     }
 }
+
+
 
 const pixi = new Main();
 Vue.use(Vuex);
