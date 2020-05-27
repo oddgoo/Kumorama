@@ -21,6 +21,7 @@ export class Main {
     private layers:PIXI.Container[] = [];
 
     private static tileScale=4;
+    private currentLayer:PIXI.Container;
 
     constructor() {
         window.onload = (): void => {
@@ -58,14 +59,34 @@ export class Main {
 
         this.layers.push(this.renderLayer());
         this.layers.push(this.renderLayer(10));
+        this.layers[0].scale.set(4,4);
+        this.layers[1].scale.set(4,4);
         this.layers[1].alpha =0.5;
         this.layers[1].x += 100;
         this.layers[1].y -= 20;
 
-        this.app.ticker.add((delta) => {
-            this.moveCamera(-0.3,-0.1, -0.1);
-        });
+        this.currentLayer = this.layers[0];
 
+        this.stage.interactive = true;
+        this.stage.on('pointerdown', this.onClickStage.bind(this));
+
+         this.app.ticker.add((delta) => {
+             this.moveCamera(-0.3,-0.1, -0.1);
+         });
+
+        const interactionManager = new PIXI.interaction.InteractionManager(this.app.renderer);
+        interactionManager.on('mousedown', this.onClickStage.bind(this))
+
+    }
+
+    private onClickStage(event):void {
+        console.log("adding tile");
+        this.drawTile(
+            1,
+            Math.floor( (event.data.global.x - this.currentLayer.x)/16/this.currentLayer.scale.x) ,
+            Math.floor((event.data.global.y - this.currentLayer.y)/16/this.currentLayer.scale.y) ,
+            this.currentLayer);
+        console.log(event.data.global);
     }
 
     private renderLayer(blur= 0): PIXI.Container {
@@ -104,8 +125,8 @@ export class Main {
         //let newTexture = new PIXI.Texture(oldTexture.baseTexture, oldTexture.frame);
 
         const tile = new PIXI.Sprite(tileTexture);
-        tile.scale.set(Main.tileScale, Main.tileScale);
-        tile.position.set(x*16*Main.tileScale + 100, y*16*Main.tileScale + 100);
+        // tile.scale.set(Main.tileScale, Main.tileScale);
+        tile.position.set(x*16, y*16);
         layer.addChild(tile);
     }
 
