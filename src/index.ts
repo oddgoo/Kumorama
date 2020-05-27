@@ -10,8 +10,8 @@ import rabbitImage from "./assets/rabbit.png";
 
 
 export class Main {
-    private static readonly GAME_WIDTH = 800;
-    private static readonly GAME_HEIGHT = 600;
+    private static readonly GAME_WIDTH = 1200;
+    private static readonly GAME_HEIGHT = 900;
 
     private app!: PIXI.Application;
 
@@ -119,8 +119,8 @@ export class Main {
         document.body.appendChild(this.app.view);
 
         this.app.renderer.resize(window.innerWidth, window.innerHeight);
-        this.app.stage.scale.x = window.innerWidth / Main.GAME_WIDTH;
-        this.app.stage.scale.y = window.innerHeight / Main.GAME_HEIGHT;
+        // this.app.stage.scale.x = window.innerWidth / Main.GAME_WIDTH;
+        // this.app.stage.scale.y = window.innerHeight / Main.GAME_HEIGHT;
     }
 
     private moveCamera(x=0, y=0, z=0): void {
@@ -136,8 +136,6 @@ export class Main {
         }
     }
 }
-
-
 
 const pixi = new Main();
 Vue.use(Vuex);

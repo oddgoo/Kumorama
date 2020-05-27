@@ -1,3 +1,778 @@
-{
-    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"]
+"data" : {
+    "AppVersion": "10.1.1",
+    "UserData": {
+        "email": "",
+        "postCode": "88012",
+        "referral": "Online search",
+        "school": "",
+        "playerName": "Ayla whiteley",
+        "DOB_Year": 2010,
+        "DOB_Month": "June",
+        "DOB_Day": 1,
+        "gender": "female",
+        "esl": "yes",
+        "hearingIssueIndication": "no",
+        "hearingIssueHistory": "no",
+        "age": 9.9,
+        "supervisorAge": 35,
+        "supervisorSkippedDecade": true,
+        "supervisorYear": 1985,
+        "pathway": "",
+        "profileAge": 9.9,
+        "adultSkippedDecade": true,
+        "device_language": "en_US",
+        "InstallMode": "Store",
+        "device_region": "US",
+        "app_locale": "English_American",
+        "child_story": "Lite_EN_US",
+        "deviceModel": "iPad2,4",
+        "operatingSystem": "iPhone OS 9.3.5",
+        "headphoneBrand": "Sony",
+        "headphoneModel": "",
+        "installationID": "813552cb-0528-4d12-924c-b94d8a06fd5a",
+        "backgroundNoiseDb": null,
+        "repeatedTiN": 0,
+        "repeatedSiN": 0,
+        "repeatedCalibrationAdult": 1,
+        "repeatedCalibrationChild": 0
+    },
+    "UsageData": {
+        "totalTime": 435.7332,
+        "totalTimeAdult": 123.570694,
+        "pauseTrack": [
+            6,
+            7,
+            16
+        ],
+        "timeStamp": "Sunday, May 24, 2020 7:31 PM",
+        "platform": "IPhonePlayer"
+    },
+    "CalibrationData": {
+        "track_adult": [
+            -30,
+            -38,
+            -46,
+            -54,
+            -62,
+            -56,
+            -53,
+            -50,
+            -47,
+            -50,
+            -53,
+            -56,
+            -59,
+            -56,
+            -53,
+            -50,
+            -47,
+            -50,
+            -53
+        ],
+        "track_R": [
+            -34,
+            -40,
+            -46,
+            -52,
+            -58,
+            -64,
+            -58,
+            -55,
+            -58,
+            -55,
+            -58
+        ],
+        "track_L": [
+            -28,
+            -34,
+            -40,
+            -46,
+            -52,
+            -58,
+            -64,
+            -58,
+            -55,
+            -52,
+            -55,
+            -58,
+            -61,
+            -58,
+            -55
+        ],
+        "adultTrials": [
+            {
+                "order": 0,
+                "success": true,
+                "stimuli": "Hotdog",
+                "selected": "Hotdog",
+                "db": -22
+            },
+            {
+                "order": 1,
+                "success": true,
+                "stimuli": "Bathtub",
+                "selected": "Bathtub",
+                "db": -30
+            },
+            {
+                "order": 2,
+                "success": true,
+                "stimuli": "Rainbow",
+                "selected": "Rainbow",
+                "db": -38
+            },
+            {
+                "order": 3,
+                "success": true,
+                "stimuli": "Icecream",
+                "selected": "Icecream",
+                "db": -46
+            },
+            {
+                "order": 4,
+                "success": true,
+                "stimuli": "Popcorn",
+                "selected": "Popcorn",
+                "db": -54
+            },
+            {
+                "order": 5,
+                "success": false,
+                "stimuli": "Hotdog",
+                "selected": "Icecream",
+                "db": -62
+            },
+            {
+                "order": 6,
+                "success": false,
+                "stimuli": "Icecream",
+                "selected": "Rainbow",
+                "db": -56
+            },
+            {
+                "order": 7,
+                "success": false,
+                "stimuli": "Rainbow",
+                "selected": "Bathtub",
+                "db": -53
+            },
+            {
+                "order": 8,
+                "success": false,
+                "stimuli": "Popcorn",
+                "selected": "Bathtub",
+                "db": -50
+            },
+            {
+                "order": 9,
+                "success": true,
+                "stimuli": "Hotdog",
+                "selected": "Hotdog",
+                "db": -47
+            },
+            {
+                "order": 10,
+                "success": true,
+                "stimuli": "Icecream",
+                "selected": "Icecream",
+                "db": -50
+            },
+            {
+                "order": 11,
+                "success": true,
+                "stimuli": "Hotdog",
+                "selected": "Hotdog",
+                "db": -53
+            },
+            {
+                "order": 12,
+                "success": true,
+                "stimuli": "Popcorn",
+                "selected": "Popcorn",
+                "db": -56
+            },
+            {
+                "order": 13,
+                "success": false,
+                "stimuli": "Bathtub",
+                "selected": "Rainbow",
+                "db": -59
+            },
+            {
+                "order": 14,
+                "success": false,
+                "stimuli": "Rainbow",
+                "selected": null,
+                "db": -56
+            },
+            {
+                "order": 15,
+                "success": false,
+                "stimuli": "Popcorn",
+                "selected": "Hotdog",
+                "db": -53
+            },
+            {
+                "order": 16,
+                "success": false,
+                "stimuli": "Rainbow",
+                "selected": "Hotdog",
+                "db": -50
+            },
+            {
+                "order": 17,
+                "success": true,
+                "stimuli": "Hotdog",
+                "selected": "Hotdog",
+                "db": -47
+            },
+            {
+                "order": 18,
+                "success": true,
+                "stimuli": "Icecream",
+                "selected": "Icecream",
+                "db": -50
+            }
+        ],
+        "childTrials_L": [
+            {
+                "order": 0,
+                "success": true,
+                "stimuli": "Rainbow",
+                "selected": "Rainbow",
+                "db": -22
+            },
+            {
+                "order": 1,
+                "success": true,
+                "stimuli": "Icecream",
+                "selected": "Icecream",
+                "db": -28
+            },
+            {
+                "order": 2,
+                "success": true,
+                "stimuli": "Popcorn",
+                "selected": "Popcorn",
+                "db": -34
+            },
+            {
+                "order": 3,
+                "success": true,
+                "stimuli": "Bathtub",
+                "selected": "Bathtub",
+                "db": -40
+            },
+            {
+                "order": 4,
+                "success": true,
+                "stimuli": "Hotdog",
+                "selected": "Hotdog",
+                "db": -46
+            },
+            {
+                "order": 5,
+                "success": true,
+                "stimuli": "Popcorn",
+                "selected": "Popcorn",
+                "db": -52
+            },
+            {
+                "order": 6,
+                "success": true,
+                "stimuli": "Bathtub",
+                "selected": "Bathtub",
+                "db": -58
+            },
+            {
+                "order": 7,
+                "success": false,
+                "stimuli": "Rainbow",
+                "selected": null,
+                "db": -64
+            },
+            {
+                "order": 8,
+                "success": false,
+                "stimuli": "Popcorn",
+                "selected": "Bathtub",
+                "db": -58
+            },
+            {
+                "order": 9,
+                "success": false,
+                "stimuli": "Rainbow",
+                "selected": "Hotdog",
+                "db": -55
+            },
+            {
+                "order": 10,
+                "success": true,
+                "stimuli": "Bathtub",
+                "selected": "Bathtub",
+                "db": -52
+            },
+            {
+                "order": 11,
+                "success": true,
+                "stimuli": "Popcorn",
+                "selected": "Popcorn",
+                "db": -55
+            },
+            {
+                "order": 12,
+                "success": true,
+                "stimuli": "Hotdog",
+                "selected": "Hotdog",
+                "db": -58
+            },
+            {
+                "order": 13,
+                "success": false,
+                "stimuli": "Rainbow",
+                "selected": null,
+                "db": -61
+            },
+            {
+                "order": 14,
+                "success": false,
+                "stimuli": "Popcorn",
+                "selected": null,
+                "db": -58
+            }
+        ],
+        "childTrials_R": [
+            {
+                "order": 0,
+                "success": true,
+                "stimuli": "Hotdog",
+                "selected": "Hotdog",
+                "db": -28
+            },
+            {
+                "order": 1,
+                "success": true,
+                "stimuli": "Icecream",
+                "selected": "Icecream",
+                "db": -34
+            },
+            {
+                "order": 2,
+                "success": true,
+                "stimuli": "Bathtub",
+                "selected": "Bathtub",
+                "db": -40
+            },
+            {
+                "order": 3,
+                "success": true,
+                "stimuli": "Hotdog",
+                "selected": "Hotdog",
+                "db": -46
+            },
+            {
+                "order": 4,
+                "success": true,
+                "stimuli": "Bathtub",
+                "selected": "Bathtub",
+                "db": -52
+            },
+            {
+                "order": 5,
+                "success": true,
+                "stimuli": "Hotdog",
+                "selected": "Hotdog",
+                "db": -58
+            },
+            {
+                "order": 6,
+                "success": false,
+                "stimuli": "Bathtub",
+                "selected": null,
+                "db": -64
+            },
+            {
+                "order": 7,
+                "success": false,
+                "stimuli": "Popcorn",
+                "selected": "Icecream",
+                "db": -58
+            },
+            {
+                "order": 8,
+                "success": true,
+                "stimuli": "Icecream",
+                "selected": "Icecream",
+                "db": -55
+            },
+            {
+                "order": 9,
+                "success": false,
+                "stimuli": "Rainbow",
+                "selected": "Popcorn",
+                "db": -58
+            },
+            {
+                "order": 10,
+                "success": true,
+                "stimuli": "Bathtub",
+                "selected": "Bathtub",
+                "db": -55
+            }
+        ],
+        "adult_false_presses": [
+            5,
+            6,
+            7,
+            8,
+            13,
+            15,
+            16
+        ],
+        "adultSkippedCal": false,
+        "child_false_presses_L": [
+            8,
+            9
+        ],
+        "child_false_presses_R": [
+            7,
+            9
+        ],
+        "adult_practiceMark": 5,
+        "child_practiceMark_L": 7,
+        "child_practiceMark_R": 6
+    },
+    "TestSpeech": {
+        "trials": [
+            {
+                "id": 0,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_04_STIMULI_Coins_98",
+                "stimuliChosen": "US_V1_Dan_04_STIMULI_Coins_98",
+                "snr": 3,
+                "correct": true,
+                "reactionMs": 4.369934
+            },
+            {
+                "id": 1,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_02_STIMULI_BlackCamera_32",
+                "stimuliChosen": "US_V1_Dan_02_STIMULI_BlackCamera_32",
+                "snr": -1,
+                "correct": true,
+                "reactionMs": 4.705017
+            },
+            {
+                "id": 2,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_07_STIMULI_BrownFlowers_171",
+                "stimuliChosen": "US_V1_Dan_07_STIMULI_BrownFlowers_171",
+                "snr": -5,
+                "correct": true,
+                "reactionMs": 5.136841
+            },
+            {
+                "id": 3,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_02_STIMULI_SmallRedFlashlight_35",
+                "stimuliChosen": "none",
+                "snr": -9,
+                "correct": false,
+                "reactionMs": -100
+            },
+            {
+                "id": 4,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_02_STIMULI_SmallRedFlashlight_35",
+                "stimuliChosen": "US_V1_Dan_02_STIMULI_SmallRedFlashlight_35",
+                "snr": -7,
+                "correct": true,
+                "reactionMs": 4.937744
+            },
+            {
+                "id": 5,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_02_STIMULI_WhiteBlanket_24",
+                "stimuliChosen": "US_V1_Dan_02_STIMULI_WhiteBlanket_24",
+                "snr": -11,
+                "correct": true,
+                "reactionMs": 4.270691
+            },
+            {
+                "id": 6,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_04_STIMULI_OrangeCarrot_86",
+                "stimuliChosen": "none",
+                "snr": -13,
+                "correct": false,
+                "reactionMs": -100
+            },
+            {
+                "id": 7,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_04_STIMULI_OrangeCarrot_86",
+                "stimuliChosen": "US_V1_Dan_04_STIMULI_OrangeCarrot_86",
+                "snr": -11,
+                "correct": true,
+                "reactionMs": 5.13769531
+            },
+            {
+                "id": 8,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_02_STIMULI_TeddyBear Keychain_38",
+                "stimuliChosen": "US_V1_Dan_02_STIMULI_TeddyBear Keychain_38",
+                "snr": -13,
+                "correct": true,
+                "reactionMs": 4.90386963
+            },
+            {
+                "id": 9,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_02_STIMULI_OrangeDrink_27",
+                "stimuliChosen": "US_V1_Dan_02_STIMULI_OrangeDrink_27",
+                "snr": -15,
+                "correct": true,
+                "reactionMs": 5.57055664
+            },
+            {
+                "id": 10,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_04_STIMULI_StrawberryJelly_84",
+                "stimuliChosen": "Green_tree_Raccoon",
+                "snr": -17,
+                "correct": false,
+                "reactionMs": -100
+            },
+            {
+                "id": 11,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_04_STIMULI_CheeseSandwich_88",
+                "stimuliChosen": "none",
+                "snr": -13,
+                "correct": false,
+                "reactionMs": -100
+            },
+            {
+                "id": 12,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_04_STIMULI_CheeseSandwich_88",
+                "stimuliChosen": "US_V1_Dan_04_STIMULI_CheeseSandwich_88",
+                "snr": -11,
+                "correct": true,
+                "reactionMs": 4.83575439
+            },
+            {
+                "id": 13,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_07_STIMULI_Snake Black and White_173",
+                "stimuliChosen": "Bag_green",
+                "snr": -13,
+                "correct": false,
+                "reactionMs": -100
+            },
+            {
+                "id": 14,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_07_STIMULI_Racooon_161",
+                "stimuliChosen": "US_V1_Dan_07_STIMULI_Racooon_161",
+                "snr": -9,
+                "correct": true,
+                "reactionMs": 4.003418
+            },
+            {
+                "id": 15,
+                "testName": "speech",
+                "stimuliCorrect": "US_V1_Dan_07_STIMULI_YellowBird_167",
+                "stimuliChosen": "US_V1_Dan_07_STIMULI_YellowBird_167",
+                "snr": -11,
+                "correct": true,
+                "reactionMs": 6.00292969
+            },
+            {
+                "id": 16,
+                "testName": "speech",
+                "stimuliCorrect": "projected",
+                "stimuliChosen": "projected",
+                "snr": -13,
+                "correct": true,
+                "reactionMs": 0
+            }
+        ],
+        "pauseTrack": null,
+        "practiceMarker": 5
+    },
+    "TestTone": {
+        "trials": [
+            {
+                "id": 0,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "toneButton",
+                "snr": 6,
+                "correct": true,
+                "reactionMs": 1.16375732
+            },
+            {
+                "id": 1,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "toneButton",
+                "snr": 1,
+                "correct": true,
+                "reactionMs": 1.40075684
+            },
+            {
+                "id": 2,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "toneButton",
+                "snr": -4,
+                "correct": true,
+                "reactionMs": 1.30065918
+            },
+            {
+                "id": 3,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "toneButton",
+                "snr": -9,
+                "correct": true,
+                "reactionMs": 1.434082
+            },
+            {
+                "id": 4,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "toneButton",
+                "snr": -14,
+                "correct": true,
+                "reactionMs": 1.79998779
+            },
+            {
+                "id": 5,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "noUserAction",
+                "snr": -19,
+                "correct": false,
+                "reactionMs": -100
+            },
+            {
+                "id": 6,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "noUserAction",
+                "snr": -16,
+                "correct": false,
+                "reactionMs": -100
+            },
+            {
+                "id": 7,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "toneButton",
+                "snr": -12,
+                "correct": true,
+                "reactionMs": 1.39978027
+            },
+            {
+                "id": 8,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "toneButton",
+                "snr": -15,
+                "correct": true,
+                "reactionMs": 1.69915771
+            },
+            {
+                "id": 9,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "noUserAction",
+                "snr": -18,
+                "correct": false,
+                "reactionMs": -100
+            },
+            {
+                "id": 10,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "toneButton",
+                "snr": -14,
+                "correct": true,
+                "reactionMs": 1.5010376
+            },
+            {
+                "id": 11,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "noUserAction",
+                "snr": -17,
+                "correct": false,
+                "reactionMs": -100
+            },
+            {
+                "id": 12,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "toneButton",
+                "snr": -13,
+                "correct": true,
+                "reactionMs": 1.73492432
+            },
+            {
+                "id": 13,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "toneButton",
+                "snr": -16,
+                "correct": true,
+                "reactionMs": 1.50158691
+            },
+            {
+                "id": 14,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "noUserAction",
+                "snr": -19,
+                "correct": false,
+                "reactionMs": -100
+            },
+            {
+                "id": 15,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "noUserAction",
+                "snr": -15,
+                "correct": false,
+                "reactionMs": -100
+            },
+            {
+                "id": 16,
+                "testName": "tone",
+                "stimuliCorrect": "toneButton",
+                "stimuliChosen": "toneButton",
+                "snr": -11,
+                "correct": true,
+                "reactionMs": 1.40087891
+            },
+            {
+                "id": 17,
+                "testName": "tone",
+                "stimuliCorrect": "projected",
+                "stimuliChosen": "projected",
+                "snr": -14,
+                "correct": true,
+                "reactionMs": 0
+            }
+        ],
+        "pauseTrack": [
+            6,
+            7,
+            16
+        ],
+        "practiceMarker": 6
+    },
+    "licenseStamp": "",
+    "sponsorTag": ""
 }
