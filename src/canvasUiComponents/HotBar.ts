@@ -1,18 +1,24 @@
 import * as PIXI from "pixi.js";
+
 import Main from "../index"
+import Slot from "./Slot"
 
 export default class HotBar {
 
-    private size = 50;
+    private container: PIXI.Container = new PIXI.Container();
+    private slots: Slot[] = [];
 
     public init(stage:PIXI.Container): void {
-        console.log("creating HotBar");
-        const square = new PIXI.Graphics()
-            .beginFill(0xffffff)
-            .drawRect(Main.GAME_WIDTH/2, Main.GAME_HEIGHT - this.size,  this.size, this.size)
-            .endFill();
+        stage.addChild(this.container);
+        this.container.y = Main.GAME_HEIGHT/2 - Slot.size;
 
-        stage.addChild(square);
+        for (let i = 0; i < 10; i++) {
+            this.slots.push( new Slot(this.container, (Slot.size + 5) * i  , 0))
+        }
+
+        this.slots[3].select();
+
+        //Keyboard.events.on('pressed_KeyW', null, (keyCode, event) => { console.log(keyCode); });
     }
 
 }

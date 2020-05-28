@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import * as PIXI from "pixi.js";
+import Keyboard from "pixi.js-keyboard";
 
 import App from './App.vue';
-
-import * as PIXI from "pixi.js";
 
 import tilesImage from "./assets/Tileset.png";
 import rabbitImage from "./assets/rabbit.png";
@@ -72,22 +72,31 @@ export default class Main {
              this.moveCamera(-0.3,-0.1, -0.1);
          });
 
+        this.app.ticker.add(delta => this.gameLoop(delta));
+
         const interactionManager = new PIXI.interaction.InteractionManager(this.app.renderer);
         interactionManager.on('mousedown', this.onClickStage.bind(this))
 
         const hotBar:HotBar = new HotBar();
         hotBar.init(this.stage);
 
+        Keyboard.events.on('pressed_KeyW', null, (keyCode, event) => { console.log(keyCode); });
+
+    }
+
+    gameLoop(delta):void{
+        //Update the current game state:
+        Keyboard.update();
     }
 
     private onClickStage(event):void {
-        console.log("adding tile");
+
         this.drawTile(
             1,
             Math.floor( (event.data.global.x - this.currentLayer.x)/16/this.currentLayer.scale.x) ,
             Math.floor((event.data.global.y - this.currentLayer.y)/16/this.currentLayer.scale.y) ,
             this.currentLayer);
-        console.log(event.data.global);
+
     }
 
     private renderLayer(blur= 0): PIXI.Container {
@@ -120,7 +129,6 @@ export default class Main {
     }
 
     private drawTile(tileId:number, x:number, y:number, layer:PIXI.Container): void {
-        console.log("drawing tileId " + tileId);
 
         const tileTexture = new PIXI.Texture(this.baseTexture, new PIXI.Rectangle(tileId * 16, 0, 16, 16));
         //let newTexture = new PIXI.Texture(oldTexture.baseTexture, oldTexture.frame);
