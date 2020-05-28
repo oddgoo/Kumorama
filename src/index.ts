@@ -7,11 +7,12 @@ import * as PIXI from "pixi.js";
 
 import tilesImage from "./assets/Tileset.png";
 import rabbitImage from "./assets/rabbit.png";
+import HotBar from "./canvasUiComponents/HotBar";
 
 
-export class Main {
-    private static readonly GAME_WIDTH = 1200;
-    private static readonly GAME_HEIGHT = 900;
+export default class Main {
+    public static readonly GAME_WIDTH = 1200;
+    public static readonly GAME_HEIGHT = 900;
 
     private app!: PIXI.Application;
 
@@ -67,15 +68,15 @@ export class Main {
 
         this.currentLayer = this.layers[0];
 
-        this.stage.interactive = true;
-        this.stage.on('pointerdown', this.onClickStage.bind(this));
-
          this.app.ticker.add((delta) => {
              this.moveCamera(-0.3,-0.1, -0.1);
          });
 
         const interactionManager = new PIXI.interaction.InteractionManager(this.app.renderer);
         interactionManager.on('mousedown', this.onClickStage.bind(this))
+
+        const hotBar:HotBar = new HotBar();
+        hotBar.init(this.stage);
 
     }
 
@@ -132,7 +133,7 @@ export class Main {
 
     private createRenderer(): void {
         this.app = new PIXI.Application({
-            backgroundColor: 0xd3d3d3,
+            backgroundColor: 0xc3c3cc,
             width: Main.GAME_WIDTH,
             height: Main.GAME_HEIGHT,
         });

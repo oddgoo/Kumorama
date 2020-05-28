@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <h3>Notepad</h3>
+    <div class="Notepad">
         <textarea :value="input" @input="update"></textarea>
         <div v-html="compiledMarkdown"></div>
     </div>
@@ -30,4 +29,9 @@
 
 
 <style lang="scss" scoped>
+    .Notepad{
+        border-radius:10px;
+        background-color: gray;
+
+    }
 </style>

@@ -1,8 +1,7 @@
 <template>
-    <div>
-        Hello {{ count }} <br/>
-        <button v-on:click="click">Click</button>
-        <Notepad></Notepad>
+    <div class="MainContainer">
+        <div class="MenuBar">Kumorama</div>
+
     </div>
 
 </template>
@@ -10,10 +9,12 @@
 <script lang="ts">
     import Vue from "vue";
     import Notepad from "./uiComponents/Notepad.vue"
+    import Hotbar from "./uiComponents/Hotbar.vue"
 
     export default Vue.extend({
         components: {
-            Notepad
+            Notepad,
+            Hotbar
         },
         computed: {
             count () {
@@ -29,4 +30,24 @@
 </script>
 
 <style lang="scss" scoped>
+    .MainContainer{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+    .MainStage{
+        flex: auto;
+        padding: 10px;
+    }
+    .MenuBar{
+        padding: 10px;
+        height: 40px;
+        background-color: #555555;
+        color:white;
+    }
+    .BottomBar{
+        padding: 10px;
+        height: 100px;
+    }
 </style>
