@@ -1,21 +1,16 @@
-// make sure to call Vue.use(Vuex) if using a module system
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex from 'vuex';
+import Vue from "vue";
+import {pixi} from "../index";
 
-// new Vue({
-//     el: '#app',
-//     computed: {
-//         count () {
-//             return store.state.count
-//         }
-//     },
-//     methods: {
-//         increment () {
-//             store.commit('increment')
-//         },
-//         decrement () {
-//             store.commit('decrement')
-//         }
-//     }
-// })
+Vue.use(Vuex);
 
+const store = new Vuex.Store({
+    state: {
+        selectedTileId: 1
+    },
+    mutations: {
+        changeTileId: (state,id) => state.selectedTileId = id
+    }
+});
+
+export default store;

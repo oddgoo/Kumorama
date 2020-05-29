@@ -3,11 +3,15 @@ import * as PIXI from "pixi.js";
 export default class Slot {
 
     public static readonly size = 50;
-    private container:PIXI.Container = new PIXI.Container();
-    private bg:PIXI.Graphics;
-    private sprite:PIXI.Sprite;
+    public container:PIXI.Container = new PIXI.Container();
 
-    constructor(parent: PIXI.Container, x: number, y: number) {
+    private readonly bg:PIXI.Graphics;
+    private readonly sprite:PIXI.Sprite;
+    private id!:number;
+
+    constructor(parent: PIXI.Container, x: number, y: number, id: number) {
+
+        this.id = id;
 
         this.bg = new PIXI.Graphics()
             .beginFill(0xdddddd)
@@ -23,12 +27,15 @@ export default class Slot {
         this.container.addChild(this.sprite);
         this.container.position.set(x,y);
         this.container.pivot.set(Slot.size/2, Slot.size/2);
+        this.container.interactive = true;
         parent.addChild(this.container);
 
+        //this.sprite.on('pointerdown', this.select.bind(this))
     }
 
     public select():void{
         this.container.scale.set(1.3, 1.3);
+        console.log("selected slot: " + this.id);
     }
 
     public deselect():void{

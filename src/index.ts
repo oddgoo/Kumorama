@@ -1,14 +1,13 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
 import * as PIXI from "pixi.js";
-
 
 import App from './App.vue';
 
 import tilesImage from "./assets/Tileset.png";
 import rabbitImage from "./assets/rabbit.png";
 import HotBar from "./canvasUiComponents/HotBar";
-
+import store from "./store/index";
+import Vue from "vue";
+import Vuex from "vuex";
 
 export default class Main {
     public static width = 1200;
@@ -17,11 +16,11 @@ export default class Main {
     public static baseTexture:PIXI.BaseTexture;
 
     private app!: PIXI.Application;
-    private stage:PIXI.Container;
+    private stage!:PIXI.Container;
     private layers:PIXI.Container[] = [];
 
     private static tileScale=4;
-    private currentLayer:PIXI.Container;
+    private currentLayer!:PIXI.Container;
 
     constructor() {
         window.onload = (): void => {
@@ -48,7 +47,6 @@ export default class Main {
 
     }
 
-
     private onAssetsLoaded(): void {
 
         this.createRenderer();
@@ -59,16 +57,22 @@ export default class Main {
 
         this.layers.push(this.renderLayer());
         this.layers.push(this.renderLayer(10));
+        this.layers[0].position.set(Main.width/3, Main.height/3);
+        this.layers[1].position.set(Main.width/3, Main.height/3);
         this.layers[0].scale.set(Main.tileScale, Main.tileScale);
-        this.layers[1].scale.set(Main.tileScale, Main.tileScale);
+        this.layers[1].scale.set(Main.tileScale*1.1, Main.tileScale*1.1);
         this.layers[1].alpha =0.5;
         this.layers[1].x += 100;
         this.layers[1].y -= 20;
 
         this.currentLayer = this.layers[0];
 
-         this.app.ticker.add((delta) => {
-             this.moveCamera(-0.3,-0.1, -0.1);
+        let sinX= 0,sinY= 0, sinZ= 0;
+        this.app.ticker.add((delta) => {
+             sinX+=0.03;
+             sinY+=0.02;
+             sinZ+=0.01;
+             this.moveCamera( Math.sin(sinX) * delta/6, Math.sin(sinY) * delta/8, -Math.sin(sinZ) * delta);
          });
 
         const interactionManager = new PIXI.interaction.InteractionManager(this.app.renderer);
@@ -79,14 +83,12 @@ export default class Main {
 
     }
 
-    private onClickStage(event):void {
-
+    private onClickStage(event:PIXI.interaction.InteractionEvent):void {
         this.drawTile(
-            1,
+            store.state.selectedTileId,
             Math.floor( (event.data.global.x - this.currentLayer.x)/16/this.currentLayer.scale.x) ,
             Math.floor((event.data.global.y - this.currentLayer.y)/16/this.currentLayer.scale.y) ,
             this.currentLayer);
-
     }
 
     private renderLayer(blur= 0): PIXI.Container {
@@ -160,24 +162,7 @@ export default class Main {
     }
 }
 
-const pixi = new Main();
-Vue.use(Vuex);
-
-
-const store = new Vuex.Store({
-    state: {
-        count: 0
-    },
-    mutations: {
-        increment: state => state.count++,
-        decrement: state => state.count--
-    },
-    actions: {
-        increment (context) {
-            context.commit('increment');
-            pixi.addRandomSprite();
-        }
-    }
-})
+export const pixi = new Main();
 
 new Vue({ render: createElement => createElement(App) , store: store}).$mount('#app');
+

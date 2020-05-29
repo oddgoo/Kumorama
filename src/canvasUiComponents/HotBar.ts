@@ -4,6 +4,7 @@ import Main from "../index"
 import Slot from "./Slot"
 
 import Keyboard from "pixi.js-keyboard";
+import store from "../store/index";
 
 export default class HotBar {
 
@@ -16,19 +17,26 @@ export default class HotBar {
         this.container.y = Main.height - Slot.size;
 
         for (let i = 0; i < 9; i++) {
-            this.slots.push( new Slot(this.container, (Slot.size + 5) * i  + Main.width/2 - ((Slot.size + 5) * 9) / 2, 0))
+            this.slots.push( new Slot(this.container, (Slot.size + 5) * i  + Main.width/2 - ((Slot.size + 5) * 9) / 2, 0, i))
             this.slots[i].changeImage(new PIXI.Texture(Main.baseTexture, new PIXI.Rectangle(i * 16, 0, 16, 16)))
+            this.slots[i].container.on('pointerdown', () => {
+                this.deselectSlots();
+                store.commit('changeTileId', (i));
+                this.slots[i].select();
+                }
+            );
         }
 
-        this.slots[0].select();
-        app.ticker.add(delta => this.ticker(delta));
+        app.ticker.add(delta => this.ticker());
 
-        for (let i = 0; i < 10; i++) {
-            Keyboard.events.on('pressed_Digit'+i, null, (keyCode, event) => {
+        for (let i = 1; i <10; i++) {
+            Keyboard.events.on('pressed_Digit'+i, null, (keyCode:any, event:any) => {
                 this.deselectSlots();
                 this.slots[i-1].select();
+                store.commit('changeTileId', (i-1));
             });
         }
+        this.slots[1].select();
     }
 
     deselectSlots():void{
@@ -36,7 +44,7 @@ export default class HotBar {
             slot.deselect();
     }
 
-    ticker(delta):void{
+    ticker():void{
         Keyboard.update();
     }
 

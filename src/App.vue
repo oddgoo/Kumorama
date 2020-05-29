@@ -1,6 +1,6 @@
 <template>
     <div class="MainContainer">
-        <div class="MenuBar">Kumorama</div>
+        <div class="MenuBar">Kumorama {{tileId}}</div>
 <!--        <Notepad></Notepad>-->
     </div>
 
@@ -17,14 +17,14 @@
             Hotbar
         },
         computed: {
-            count () {
-                return this.$store.state.count;
+            tileId () {
+                return this.$store.state.selectedTileId;
             }
         },
         methods: {
-            click: function () {
-                this.$store.dispatch('increment')
-            }
+            // click: function () {
+            //     this.$store.dispatch('increment');
+            // }
         }
     });
 </script>
