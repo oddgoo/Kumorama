@@ -11,31 +11,31 @@ export default class Slot {
 
         this.bg = new PIXI.Graphics()
             .beginFill(0xdddddd)
-            .drawRect(x, y,  Slot.size, Slot.size)
+            .drawRect(0, 0,  Slot.size, Slot.size)
             .endFill();
 
         this.bg.alpha = 0.7;
 
         this.sprite = new PIXI.Sprite();
+        this.sprite.scale.set(3, 3);
 
         this.container.addChild(this.bg);
         this.container.addChild(this.sprite);
-        this.container.pivot.set(Slot.size, Slot.size/2)
+        this.container.position.set(x,y);
+        this.container.pivot.set(Slot.size/2, Slot.size/2);
         parent.addChild(this.container);
 
     }
 
     public select():void{
-        this.container.scale.set(1.2, 1.2);
-        null;
+        this.container.scale.set(1.3, 1.3);
     }
 
     public deselect():void{
-        this.container.scale.set(1, 1.);
-        null;
+        this.container.scale.set(1, 1);
     }
 
-    public changeImage():void{
-        null;
+    public changeImage(texture:PIXI.Texture):void{
+        this.sprite.texture = texture;
     }
 }

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import * as PIXI from "pixi.js";
-import Keyboard from "pixi.js-keyboard";
+
 
 import App from './App.vue';
 
@@ -11,14 +11,13 @@ import HotBar from "./canvasUiComponents/HotBar";
 
 
 export default class Main {
-    public static readonly GAME_WIDTH = 1200;
-    public static readonly GAME_HEIGHT = 900;
+    public static width = 1200;
+    public static height = 900;
+
+    public static baseTexture:PIXI.BaseTexture;
 
     private app!: PIXI.Application;
-
-    private baseTexture:PIXI.BaseTexture;
     private stage:PIXI.Container;
-
     private layers:PIXI.Container[] = [];
 
     private static tileScale=4;
@@ -55,13 +54,13 @@ export default class Main {
         this.createRenderer();
         this.stage = this.app.stage;
 
-        this.baseTexture = PIXI.BaseTexture.from("tiles");
-        this.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+        Main.baseTexture = PIXI.BaseTexture.from("tiles");
+        Main.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
         this.layers.push(this.renderLayer());
         this.layers.push(this.renderLayer(10));
-        this.layers[0].scale.set(4,4);
-        this.layers[1].scale.set(4,4);
+        this.layers[0].scale.set(Main.tileScale, Main.tileScale);
+        this.layers[1].scale.set(Main.tileScale, Main.tileScale);
         this.layers[1].alpha =0.5;
         this.layers[1].x += 100;
         this.layers[1].y -= 20;
@@ -72,21 +71,12 @@ export default class Main {
              this.moveCamera(-0.3,-0.1, -0.1);
          });
 
-        this.app.ticker.add(delta => this.gameLoop(delta));
-
         const interactionManager = new PIXI.interaction.InteractionManager(this.app.renderer);
         interactionManager.on('mousedown', this.onClickStage.bind(this))
 
         const hotBar:HotBar = new HotBar();
-        hotBar.init(this.stage);
+        hotBar.init(this.stage, this.app);
 
-        Keyboard.events.on('pressed_KeyW', null, (keyCode, event) => { console.log(keyCode); });
-
-    }
-
-    gameLoop(delta):void{
-        //Update the current game state:
-        Keyboard.update();
     }
 
     private onClickStage(event):void {
@@ -130,7 +120,7 @@ export default class Main {
 
     private drawTile(tileId:number, x:number, y:number, layer:PIXI.Container): void {
 
-        const tileTexture = new PIXI.Texture(this.baseTexture, new PIXI.Rectangle(tileId * 16, 0, 16, 16));
+        const tileTexture = new PIXI.Texture(Main.baseTexture, new PIXI.Rectangle(tileId * 16, 0, 16, 16));
         //let newTexture = new PIXI.Texture(oldTexture.baseTexture, oldTexture.frame);
 
         const tile = new PIXI.Sprite(tileTexture);
@@ -142,13 +132,16 @@ export default class Main {
     private createRenderer(): void {
         this.app = new PIXI.Application({
             backgroundColor: 0xc3c3cc,
-            width: Main.GAME_WIDTH,
-            height: Main.GAME_HEIGHT,
+            width: window.innerWidth,
+            height: window.innerHeight,
         });
 
         document.body.appendChild(this.app.view);
 
         this.app.renderer.resize(window.innerWidth, window.innerHeight);
+        Main.width = this.app.screen.width;
+        Main.height = this.app.screen.height;
+
         // this.app.stage.scale.x = window.innerWidth / Main.GAME_WIDTH;
         // this.app.stage.scale.y = window.innerHeight / Main.GAME_HEIGHT;
     }

@@ -1,7 +1,7 @@
 <template>
     <div class="MainContainer">
         <div class="MenuBar">Kumorama</div>
-
+<!--        <Notepad></Notepad>-->
     </div>
 
 </template>
