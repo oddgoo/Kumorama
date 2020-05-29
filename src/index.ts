@@ -6,8 +6,7 @@ import tilesImage from "./assets/Tileset.png";
 import rabbitImage from "./assets/rabbit.png";
 import HotBar from "./canvasUiComponents/HotBar";
 import store from "./store/index";
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue, { VNode } from "vue";
 
 export default class Main {
     public static width = 1200;
@@ -76,7 +75,7 @@ export default class Main {
          });
 
         const interactionManager = new PIXI.interaction.InteractionManager(this.app.renderer);
-        interactionManager.on('mousedown', this.onClickStage.bind(this))
+        interactionManager.on('mousedown', this.onClickStage.bind(this));
 
         const hotBar:HotBar = new HotBar();
         hotBar.init(this.stage, this.app);
@@ -164,5 +163,6 @@ export default class Main {
 
 export const pixi = new Main();
 
-new Vue({ render: createElement => createElement(App) , store: store}).$mount('#app');
-
+new Vue({ render: (createElement):VNode => {
+        return createElement(App);
+    }, store: store}).$mount('#app');
